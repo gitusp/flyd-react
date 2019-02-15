@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/gitusp/react-flyd/issues"
   },
-  "homepage": "https://github.com/gitusp/react-flyd#readme"
+  "homepage": "https://github.com/gitusp/react-flyd#readme",
+  "dependencies": {
+    "flyd": "^0.2.8",
+    "react": "^16.8.2"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.3"
+  }
 }
