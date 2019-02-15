@@ -24,10 +24,10 @@ Tutorial
 Streams are connected to a component state with `connect` function.
 A connected state will be updated automatically when the stream emits a new value.
 
-```ts
-import * as flyd from "flyd";
-import * as every from "flyd/module/every";
-import * as React from "react";
+```js
+import flyd from "flyd";
+import every from "flyd/module/every";
+import React from "react";
 import { render } from "react-dom";
 import { connect } from "react-flyd";
 
@@ -37,17 +37,17 @@ const stream = flyd.scan(n => n + 1, 0, everySecond);
 
 // A container which connects to the stream.
 const Container = () => {
-  const state = {
+  const childProps = {
     count: connect(stream)
   };
-  return <View {...state} />;
+  return React.createElement(View, childProps);
 };
 
 // A view which displays the count.
-const View = ({ count }: { count: number }) => <p>{count}</p>;
+const View = ({ count }) => <p>{count}</p>;
 
 // Mount the sample app.
-render(<Container />, document.getElementById("app"));
+render(React.createElement(Container), document.getElementById("app"));
 ```
 
 ### Lifecycle Optimization
@@ -57,17 +57,17 @@ Passing appropriate deps might be an efficient manner.
 In most cases, connecting once when a component is mounted is enough.
 Passing `[IDENTICAL]` as a second argument skips all the subsequent connection after mount.
 
-```ts
+```js
 import { connect, IDENTICAL } from "react-flyd";
 
 // Using `[IDENTICAL]` as deps skips all the subsequent connection.
 const Container = () => {
-  const state = {
+  const childProps = {
     count: connect(
       stream,
       [IDENTICAL]
     )
   };
-  return <View {...state} />;
+  return React.createElement(View, childProps);
 };
 ```
