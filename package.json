@@ -1,5 +1,5 @@
 {
-  "name": "react-flyd",
+  "name": "flyd-react",
   "version": "0.0.1",
   "description": "Minimal React bindings for Flyd.",
   "main": "index.js",
@@ -8,18 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gitusp/react-flyd.git"
+    "url": "git+https://github.com/gitusp/flyd-react.git"
   },
-  "keywords": [
-    "flyd",
-    "react"
-  ],
+  "keywords": ["flyd", "react"],
   "author": "usp",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gitusp/react-flyd/issues"
+    "url": "https://github.com/gitusp/flyd-react/issues"
   },
-  "homepage": "https://github.com/gitusp/react-flyd#readme",
+  "homepage": "https://github.com/gitusp/flyd-react#readme",
   "dependencies": {
     "flyd": "^0.2.8",
     "react": "^16.8.2"

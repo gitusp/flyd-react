@@ -1,4 +1,4 @@
-React Flyd
+Flyd React
 ===
 
 Minimal React bindings for [Flyd](https://github.com/paldepind/flyd).
@@ -7,7 +7,7 @@ Installation
 ---
 
 ```bash
-npm install gitusp/react-flyd --save
+npm install flyd-react --save
 ```
 
 Requirements
@@ -29,7 +29,7 @@ import flyd from "flyd";
 import every from "flyd/module/every";
 import React from "react";
 import { render } from "react-dom";
-import { connect } from "react-flyd";
+import { connect } from "flyd-react";
 
 // An example stream which updates every second.
 const everySecond = every(1000);
@@ -58,7 +58,7 @@ In most cases, connecting once when a component is mounted is enough.
 Passing `[IDENTICAL]` as a second argument skips all the subsequent connection after mount.
 
 ```js
-import { connect, IDENTICAL } from "react-flyd";
+import { connect, IDENTICAL } from "flyd-react";
 
 // Using `[IDENTICAL]` as deps skips all the subsequent connection.
 const Container = () => {
