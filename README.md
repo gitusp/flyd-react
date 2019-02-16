@@ -13,16 +13,15 @@ npm install flyd-react --save
 Requirements
 ---
 
-This library depends on [React Hooks API](https://reactjs.org/docs/hooks-intro.html).
-React version should be higher than 16.8.
+Since this library depends on [React Hooks API](https://reactjs.org/docs/hooks-intro.html), React version should be higher than 16.8.
 
 Tutorial
 ---
 
 ### Stream Connection
 
-Streams are connected to a component state with `connect` function.
-A connected state will be updated automatically when the stream emits a new value.
+`connect` function connects a stream to a component state internally and returns current value of the state.
+The connected state will be updated automatically when the stream emits a new value.
 
 ```js
 import flyd from "flyd";
@@ -46,15 +45,17 @@ const Container = () => {
 // A view which displays the count.
 const View = ({ count }) => <p>{count}</p>;
 
-// Mount the sample app.
+// Mount the container.
 render(React.createElement(Container), document.getElementById("app"));
 ```
 
 ### Lifecycle Optimization
 
+#### IDENTICAL
+
 `connect` accepts "dependency values" as React's `useEffect` does.
-Passing appropriate deps might be an efficient manner.
-In most cases, connecting once when a component is mounted is enough.
+Passing appropriate deps might be effective when it is in a performance critical case.
+For most streams, connecting once when a component is mounted is enough.
 Passing `[IDENTICAL]` as a second argument skips all the subsequent connection after mount.
 
 ```js
@@ -66,6 +67,30 @@ const Container = () => {
     count: connect(
       stream,
       [IDENTICAL]
+    )
+  };
+  return React.createElement(View, childProps);
+};
+```
+
+#### Selective Stream
+
+In the following example, passing `[streamKey]` as deps only reconnects when `streamKey` changes.
+Note that passing `[IDENTICAL]` will cause problems in this case because given that deps, `connect` skips reconnecting to a new stream even when a new `streamKey` is set.
+
+```js
+import { connect } from "flyd-react";
+
+const streams = {
+  one: flyd.stream(1),
+  two: flyd.stream(2)
+};
+
+const Container = ({ streamKey }) => {
+  const childProps = {
+    count: connect(
+      streams[streamKey],
+      [streamKey]
     )
   };
   return React.createElement(View, childProps);
