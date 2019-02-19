@@ -11,5 +11,3 @@ export const connect = (stream, deps) => {
   }, deps);
   return state;
 };
-
-export const IDENTICAL = {};

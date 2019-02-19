@@ -51,22 +51,22 @@ render(React.createElement(Container), document.getElementById("app"));
 
 ### Lifecycle Optimization
 
-#### IDENTICAL
+#### Skip Reconnection
 
 `connect` accepts "dependency values" as React's `useEffect` does.
 Passing appropriate deps might be effective when it is in a performance critical case.
 For most streams, connecting once when a component is mounted is enough.
-Passing `[IDENTICAL]` as a second argument skips all the subsequent connection after mount.
+Passing `[]` as a second argument skips all the subsequent connection after mount.
 
 ```js
-import { connect, IDENTICAL } from "flyd-react";
+import { connect } from "flyd-react";
 
-// Using `[IDENTICAL]` as deps skips all the subsequent connection.
+// Using `[]` as deps skips all the subsequent connection.
 const Container = () => {
   const childProps = {
     count: connect(
       stream,
-      [IDENTICAL]
+      []
     )
   };
   return React.createElement(View, childProps);
@@ -76,7 +76,7 @@ const Container = () => {
 #### Selective Stream
 
 In the following example, passing `[streamKey]` as deps only reconnects when `streamKey` changes.
-Note that passing `[IDENTICAL]` will cause problems in this case because given that deps, `connect` skips reconnecting to a new stream even when a new `streamKey` is set.
+Note that passing `[]` will cause problems in this case because given that deps, `connect` skips reconnecting to a new stream even when a new `streamKey` is set.
 
 ```js
 import { connect } from "flyd-react";

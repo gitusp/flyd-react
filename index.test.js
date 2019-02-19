@@ -2,7 +2,7 @@ import React from "react";
 import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import flyd from "flyd";
-import { connect, IDENTICAL } from ".";
+import { connect } from ".";
 
 configure({ adapter: new Adapter() });
 
@@ -55,7 +55,7 @@ test("selective stream connection", async () => {
     const childProps = {
       count: connect(
         streams[streamKey],
-        [IDENTICAL]
+        []
       )
     };
     return React.createElement(View, childProps);
